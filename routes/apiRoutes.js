@@ -5,8 +5,15 @@ console.log(db);
 module.exports = function(app) {
   // OVERVIEW ////////////////////////////////////////////////
 
-  app.get("/overview", function(req, res) {
-    res.send("route hit");
+  app.get("/api/alluserentries/:user_uuid", function(req, res) {
+    db.Entry.findAll({
+      where: {
+        user_uuid: req.params.user_uuid
+      },
+      order: [["entry_date", "DESC"]]
+    }).then(function(result) {
+      res.json(result);
+    });
   });
 
   // LIQUID ASSETS ////////////////////////////////////////////////
