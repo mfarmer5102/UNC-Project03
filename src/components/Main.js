@@ -1,11 +1,18 @@
 import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 import Navbar from "./Navbar";
 import Container from "./Container";
 
+var noPadding = {
+  padding: '0px'
+}
+
 function Main() {
   return (
-    <div className="container-fluid">
-      <div className="row">
+    <Router>
+    <div className="container-fluid full-height" style={noPadding}>
+      <div className="row full-height">
         <div className="col-3">
           <Navbar />
         </div>
@@ -14,6 +21,7 @@ function Main() {
         </div>
       </div>
     </div>
+    </Router>
   );
 }
 
