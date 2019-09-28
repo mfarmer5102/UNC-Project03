@@ -9,7 +9,7 @@ import Main from "./components/Main";
 function App() {
   return (
     <Router>
-      <div>
+      <div class='full-height'>
         <Main />
         {/* <Route exact path="/" component={Overview} />
         <Route exact path="/liquidassets" component={LiquidAssets} />
