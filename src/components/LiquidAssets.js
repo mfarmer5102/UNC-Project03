@@ -1,8 +1,19 @@
-import React from "react";
-import GraphCard from "./GraphCard";
+import React, { Component } from "react";
 
-function LiquidAssets() {
-  return <GraphCard />;
+class LiquidAssets extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      allUserEntries: []
+    };
+  }
+  render() {
+    return (
+      <div>
+        <h3>LiquidAssets</h3>
+      </div>
+    );
+  }
 }
 
 export default LiquidAssets;
