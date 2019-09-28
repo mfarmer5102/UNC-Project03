@@ -31,11 +31,12 @@ class FrozenAssets extends Component {
   render() {
     // Prep
     var allItems = this.state.allUserEntries;
-
+    var cards = allItems.map(item => <GraphCard data={item} />);
     //Render
     return (
       <div>
         <h3>Frozen Assets</h3>
+        <div>{cards}</div>
       </div>
     );
   }
