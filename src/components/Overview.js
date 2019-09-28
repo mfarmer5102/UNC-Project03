@@ -8,40 +8,30 @@ class Overview extends Component {
     };
   }
 
-//   componentDidUpdate() {
-//     this.grabAllUserEntries();
-//   }
+  componentDidUpdate() {
+    this.grabAllUserEntries();
+  }
 
-//   componentWillMount() {
-//     this.grabAllUserEntries();
-//   }
+  componentWillMount() {
+    this.grabAllUserEntries();
+  }
 
-//   grabAllUserEntries() {
-//     let url = "/hit-db";
-//     fetch(url)
-//       .then(response => response.json())
-//       .then(response => {
-//         console.log(response)
-//         this.setState({
-//           allUserEntries: response
-//         });
-//       });
-//   }
+  grabAllUserEntries() {
+    let url = "/api/alluserentries/HU5Caw6T9zcdgpxK82ly8CVrAkk1";
+    fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+        this.setState({
+          allUserEntries: response
+        });
+      });
+  }
 
   render() {
-    //Prep
-    // var allItems = this.state.allUserEntries;
-    // var activeKeywords = this.props.activeKeywords;
-    // var queriedApps = allItems.filter(function(item) {
-    //   let litmus = true;
-    //   for (let i = 0; i < activeKeywords.length; i++) {
-    //     if (item.keywords.includes(activeKeywords[i])) {
-    //     } else {
-    //       litmus = false;
-    //     }
-    //   }
-    //   return litmus;
-    // });
+    // Prep
+    var allItems = this.state.allUserEntries;
+    
 
     //Render
     return (
