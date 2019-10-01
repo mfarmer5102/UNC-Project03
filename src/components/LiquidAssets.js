@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GraphCard from './GraphCard';
 
 class LiquidAssets extends Component {
   constructor(props) {

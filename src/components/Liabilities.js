@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import GraphCard from './GraphCard';
 
 class Liabilities extends Component {
   constructor(props) {
