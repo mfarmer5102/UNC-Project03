@@ -29,11 +29,6 @@ class Overview extends Component {
   }
 
   render() {
-    // Prep
-    var allItems = this.state.allUserEntries;
-    
-
-    //Render
     return (
       <div>
         <h3>Overview</h3>

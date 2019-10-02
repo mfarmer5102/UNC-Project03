@@ -35,7 +35,7 @@ class Liabilities extends Component {
     var cards = allItems.map(item => <GraphCard data={item} />);
     //Render
     return (
-      <div>
+      <div className="animated bounceInUp">
         <h3>Liabilities</h3>
         <div className="container">
           <div className="row">{cards}</div>
