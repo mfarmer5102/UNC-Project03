@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GraphCard from './GraphCard';
+import GraphCard from "./GraphCard";
 
 class LiquidAssets extends Component {
   constructor(props) {
@@ -32,12 +32,16 @@ class LiquidAssets extends Component {
   render() {
     // Prep
     var allItems = this.state.allUserEntries;
-    var cards = allItems.map(item => <GraphCard data={item} />);
+    var cards = allItems.map((item, index) => (
+      <GraphCard key={index} data={item} />
+    ));
     //Render
     return (
-      <div>
+      <div className="animated bounceInUp">
         <h3>Liquid Assets</h3>
-        <div>{cards}</div>
+        <div className="container">
+          <div className="row">{cards}</div>
+        </div>
       </div>
     );
   }
