@@ -33,12 +33,20 @@ class SourceDetail extends Component {
   render() {
     // Prep
     var allItems = this.state.allUserEntries;
-    var cards = allItems.map(item => <TableRow data={item} />);
+    var rows = allItems.map(item => <TableRow data={item} />);
     //Render
     return (
       <div>
         <h3>Source Detail</h3>
-        <div>{cards}</div>
+        <table className="table table-striped">
+          <thead>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Source UUID</th>
+            <th>Comments</th>
+          </thead>
+          {rows}
+        </table>
       </div>
     );
   }

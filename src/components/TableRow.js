@@ -9,7 +9,14 @@ class TableRow extends Component {
   }
 
   render() {
-    return <tr>{this.props.data.amount}</tr>;
+    return (
+      <tr>
+        <td>{this.props.data.entry_date}</td>
+        <td>{this.props.data.amount}</td>
+        <td>{this.props.data.source_uuid}</td>
+        <td>{this.props.data.comments}</td>
+      </tr>
+    );
   }
 }
 

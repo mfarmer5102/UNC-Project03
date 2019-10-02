@@ -9,7 +9,7 @@ import Liabilities from "./Liabilities";
 
 function Container() {
   return (
-    <div>
+    <div className="p-3">
       <Route exact path="/" component={SourceDetail} />
       <Route exact path="/liquidassets" component={LiquidAssets} />
       <Route exact path="/frozenassets" component={FrozenAssets} />
