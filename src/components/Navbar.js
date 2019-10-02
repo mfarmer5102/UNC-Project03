@@ -49,16 +49,6 @@ function Navbar() {
       >
         Liabilities
       </Link>
-      <Link
-        to="/sourcedetail"
-        className={
-          window.location.pathname === "/sourcedetail"
-            ? "nav-link active"
-            : "nav-link"
-        }
-      >
-        Source Detail
-      </Link>
     </div>
   );
 }
