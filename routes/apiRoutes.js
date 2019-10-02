@@ -119,6 +119,7 @@ module.exports = function(app) {
       },
       order: [["entry_date", "DESC"]]
     }).then(function(result) {
+      console.log(result);
       res.json(result);
     });
   });
