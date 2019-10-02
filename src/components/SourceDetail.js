@@ -18,8 +18,10 @@ class SourceDetail extends Component {
   }
 
   grabAllUserEntries() {
-    let url =
-      "/api/sourcedetail/HU5Caw6T9zcdgpxK82ly8CVrAkk1/b7ba9c42-8527-4dab-8e75-b526f47d2457 ";
+    let loggedInUser = localStorage.getItem("activeUserUUID");
+    let sourceUUID = localStorage.getItem("activeSourceUUID");
+
+    let url = `/api/sourcedetail/${loggedInUser}/${sourceUUID}`;
     fetch(url)
       .then(response => response.json())
       .then(response => {

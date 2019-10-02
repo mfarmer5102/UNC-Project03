@@ -10,10 +10,11 @@ import Liabilities from "./Liabilities";
 function Container() {
   return (
     <div className="p-3">
-      <Route exact path="/" component={SourceDetail} />
+      <Route exact path="/" />
       <Route exact path="/liquidassets" component={LiquidAssets} />
       <Route exact path="/frozenassets" component={FrozenAssets} />
       <Route exact path="/liabilities" component={Liabilities} />
+      <Route exact path="/sourcedetail" component={SourceDetail} />
     </div>
   );
 }

@@ -32,7 +32,9 @@ class LiquidAssets extends Component {
   render() {
     // Prep
     var allItems = this.state.allUserEntries;
-    var cards = allItems.map(item => <GraphCard data={item} />);
+    var cards = allItems.map((item, index) => (
+      <GraphCard key={index} data={item} />
+    ));
     //Render
     return (
       <div>
