@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GraphCard from './GraphCard';
+import GraphCard from "./GraphCard";
 
 class LiquidAssets extends Component {
   constructor(props) {
@@ -37,7 +37,9 @@ class LiquidAssets extends Component {
     return (
       <div>
         <h3>Liquid Assets</h3>
-        <div>{cards}</div>
+        <div className="container">
+          <div className="row">{cards}</div>
+        </div>
       </div>
     );
   }
