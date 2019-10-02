@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class GraphCard extends Component {
   constructor(props) {
@@ -15,10 +16,12 @@ class GraphCard extends Component {
   render() {
     return (
       <div className="col-md-6 col-sm-12">
-        <div className="card" onClick={this.handleClick}>
-          <div className="card-header">{this.props.data.source_name}</div>
-          <div className="card-body"></div>
-        </div>
+        <Link to="/sourcedetail">
+          <div className="card" onClick={this.handleClick}>
+            <div className="card-header">{this.props.data.source_name}</div>
+            <div className="card-body"></div>
+          </div>
+        </Link>
       </div>
     );
   }
