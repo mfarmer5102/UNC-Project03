@@ -13,6 +13,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //Serve up the React application
 app.use(express.static(path.resolve(__dirname, "build")));
 
+//Login page
+app.get("/", function(req, res) {
+  res.redirect('/login')
+});
+
+app.get("/login", function(req, res) {
+  console.log("hit / route");
+  res.sendFile(path.resolve(__dirname, "public", "login.html"));
+});
+
 // Routes
 require("./routes/apiRoutes")(app);
 
