@@ -111,10 +111,9 @@ module.exports = function(app) {
 
   // SOURCE DETAIL ////////////////////////////////////////////////
 
-  app.get("/api/sourcedetail/:user_uuid/:source_uuid", function(req, res) {
+  app.get("/api/sourcedetail/:source_uuid", function(req, res) {
     db.Entry.findAll({
       where: {
-        user_uuid: req.params.user_uuid,
         source_uuid: req.params.source_uuid
       },
       order: [["entry_date", "DESC"]]

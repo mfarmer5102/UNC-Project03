@@ -15,22 +15,35 @@ class GraphCard extends Component {
     localStorage.setItem("activeUserUUID", this.state.loggedInUser);
     localStorage.setItem("activeSourceUUID", this.state.sourceUUID);
   };
+
+  grabAllCorrespondingEntries = () => {
+    let url = `/api/sourcedetail/${this.props.data.uuid}`;
+    fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        this.setState({
+          correspondingEntries: response
+        });
+      });
+  };
+
+  componentDidUpdate() {
+    this.grabAllCorrespondingEntries();
+  }
+
   render() {
+    let myLabelsArr = [];
+    let dataPointsArr = [];
+    if (this.state.correspondingEntries) {
+      for (var i = 0; i < this.state.correspondingEntries.length; i++) {
+        dataPointsArr.push(this.state.correspondingEntries[i].amount);
+        myLabelsArr.push(this.state.correspondingEntries[i].entry_date);
+      }
+    }
+
     const data = {
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ],
+      labels: myLabelsArr,
       datasets: [
         {
           label: "Amount",
@@ -51,7 +64,7 @@ class GraphCard extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: [65, 59, 80, 81, 56, 55, 40, 10, 15, 20, 70, 75]
+          data: dataPointsArr
         }
       ]
     };
@@ -62,7 +75,7 @@ class GraphCard extends Component {
           <div className="card" onClick={this.handleClick}>
             <div className="card-header">{this.props.data.source_name}</div>
             <div className="card-body">
-              <Line data={data} height={500} width={500} />
+              <Line data={data} height={250} width={500} />
             </div>
           </div>
         </Link>
