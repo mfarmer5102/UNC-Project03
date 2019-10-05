@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import TableRow from "./TableRow";
 
 class SourceDetail extends Component {
@@ -38,6 +39,9 @@ class SourceDetail extends Component {
     return (
       <div className="animated fadeInUpBig pl-5 pr-5">
         <h3>Source Detail</h3>
+        <Link to="/addnewentry">
+          <button className="btn btn-primary">Add Entry</button>
+        </Link>
         <table className="table table-striped">
           <thead>
             <th>Date</th>

@@ -64,6 +64,8 @@ class AddNewSource extends Component {
     return (
       <div className="full-height" style={flexCenter}>
         <div className="card rounded shadow p-4" style={cardStyle}>
+          <h3>Add a Source</h3>
+          <hr></hr>
           <form>
             <div class="form-group">
               <label>Source Name</label>
