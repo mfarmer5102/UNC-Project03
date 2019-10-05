@@ -54,7 +54,7 @@ class App extends Component {
         ) : (
           <div class="full-height">
             <div class="full-height" style={loginPageStyle}>
-              <div class="text-center card p-3 border rounded shadow">
+              <div class="text-center card p-3 border rounded shadow animated fadeInDownBig">
                 <h1>networthy</h1>
                 <button className="btn btn-danger" onClick={signInWithGoogle}>
                   <i class="fab fa-google border rounded-circle p-2"></i> Sign
