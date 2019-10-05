@@ -10,7 +10,7 @@ class Form extends Component {
   };
   handleInputChange = event => {
     const value = event.target.value;
-    const source = event.target.source;
+    const source = event.target.name;
     this.setState({
       [source]: value
     });

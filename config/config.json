@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "phoebe17",
+    "password": "Happyhobo1!",
     "database": "networthy",
     "host": "localhost",
     "port": 3306,
@@ -9,7 +9,7 @@
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "Happyhobo1!",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GraphCard from "./GraphCard";
+import FormInput from "./AddNewSource";
 
 class LiquidAssets extends Component {
   constructor(props) {
@@ -19,14 +20,12 @@ class LiquidAssets extends Component {
 
   grabAllUserEntries() {
     let url = "/api/liquidassets/HU5Caw6T9zcdgpxK82ly8CVrAkk1";
-    fetch(url)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        this.setState({
-          allUserEntries: response
-        });
+    fetch(url).then(response => {
+      console.log(response);
+      this.setState({
+        allUserEntries: response
       });
+    });
   }
 
   render() {
@@ -42,6 +41,7 @@ class LiquidAssets extends Component {
           <h3>Liquid Assets</h3>
           <hr></hr>
           <div className="row">{cards}</div>
+          <FormInput />
         </div>
       </div>
     );

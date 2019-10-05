@@ -26,6 +26,7 @@ module.exports = function(app) {
       },
       order: [["source_name", "ASC"]]
     }).then(function(result) {
+      console.log(result);
       res.json(result);
     });
   });
