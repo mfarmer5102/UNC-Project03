@@ -38,7 +38,7 @@ class SourceDetail extends Component {
     var rows = allItems.map(item => <TableRow data={item} />);
     //Render
     return (
-      <div className="animated bounceInUp">
+      <div className="animated fadeInUpBig pl-5 pr-5">
         <h3>Source Detail</h3>
         <table className="table table-striped">
           <thead>

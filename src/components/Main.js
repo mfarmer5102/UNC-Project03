@@ -29,7 +29,7 @@ function Main() {
           <div className="animated slideInLeft" style={floatingContentStyle}>
             <Navbar />
           </div>
-          <div className="col-12">
+          <div className="col-12 p-5">
             <Container />
           </div>
         </div>

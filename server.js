@@ -10,16 +10,23 @@ var db = require("./models");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//Serve up the React application
-app.use(express.static(path.resolve(__dirname, "public")));
-
-// Routes
-require("./routes/apiRoutes")(app);
-
-// React SPA Route
-app.get("*", function(req, res) {
-  res.sendFile(path.resolve(__dirname, "public", "index.html"));
-});
+if (process.env.JAWSDB_URL) {
+  // React SPA Route
+  app.use(express.static(path.resolve(__dirname, "build")));
+  // Routes
+  require("./routes/apiRoutes")(app);
+  app.get("*", function(req, res) {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+} else {
+  // React SPA Route
+  app.use(express.static(path.resolve(__dirname, "public")));
+  // Routes
+  require("./routes/apiRoutes")(app);
+  app.get("*", function(req, res) {
+    res.sendFile(path.resolve(__dirname, "public", "index.html"));
+  });
+}
 
 var syncOptions = { force: false, alter: true };
 
