@@ -11,15 +11,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //Serve up the React application
-app.use(express.static(path.resolve(__dirname, "build")));
+app.use(express.static(path.resolve(__dirname, "public")));
+
+//Login page
+app.get("/", function(req, res) {
+  res.sendFile(path.resolve(__dirname, "public", "login.html"));
+});
 
 // Routes
 require("./routes/apiRoutes")(app);
 
 // React SPA Route
-app.get("*", function(req, res) {
-  res.sendFile(path.resolve(__dirname, "build", "index.html"));
-});
+// app.get("*", function(req, res) {
+//   res.sendFile(path.resolve(__dirname, "public", "index.html"));
+// });
 
 var syncOptions = { force: false, alter: true };
 

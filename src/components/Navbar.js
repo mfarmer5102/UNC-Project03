@@ -9,8 +9,6 @@ var navStyle = {
 function Navbar() {
   return (
     <div class="p-3" style={navStyle}>
-      <h5 class="text-light">Networthy</h5>
-
       <Link
         to="/"
         className={
