@@ -10,8 +10,6 @@ var noPadding = {
 
 const floatingContainerStyle = {
   position: "relative",
-  backgroundImage:
-    'url("https://www.toptal.com/designers/subtlepatterns/patterns/white-waves.png")'
 };
 
 const floatingContentStyle = {

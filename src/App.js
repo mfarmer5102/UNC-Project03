@@ -46,7 +46,7 @@ class App extends Component {
           <div class="full-height" style={floatingLogoutContainerStyle}>
             <div style={floatingLogoutButtonStyle}>
               <button className="btn" onClick={signOut}>
-                <i class="fas fa-sign-out-alt border rounded-circle p-2"></i>
+                <i class="fas fa-sign-out-alt fa-2x border rounded-circle p-2 text-primary"></i>
               </button>
             </div>
             <Main />

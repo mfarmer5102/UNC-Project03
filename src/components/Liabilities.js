@@ -38,10 +38,18 @@ class Liabilities extends Component {
     return (
       <div className="animated fadeInUpBig">
         <div className="container">
-          <h3>Liabilities</h3>
-          <Link to="/addnewsource">
-            <button className="btn btn-primary">Add Source</button>
-          </Link>
+        <div className="row">
+            <div className="col-6 text-left">
+              <h3>Liabilities</h3>
+            </div>
+            <div className="col-6 text-right">
+              <Link to="/addnewsource">
+                <button className="btn">
+                  <i class="fas fa-plus-circle fa-2x text-primary"></i>
+                </button>
+              </Link>
+            </div>
+          </div>
           <hr></hr>
           <div className="row">{cards}</div>
         </div>

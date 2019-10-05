@@ -57,7 +57,7 @@ class AddNewEntry extends Component {
 
   render() {
     return (
-      <div className="full-height" style={flexCenter}>
+      <div className="full-height animated flipInY" style={flexCenter}>
         <div className="card rounded shadow p-4" style={cardStyle}>
           <h3>Add an Entry</h3>
           <hr></hr>
