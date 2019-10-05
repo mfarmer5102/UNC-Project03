@@ -11,6 +11,28 @@ const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider()
 };
 
+const loginPageStyle = {
+  backgroundImage:
+    "url('https://images.unsplash.com/photo-1480442646297-37901d5ea815?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80')",
+  backgroundSize: "cover",
+  backgroundRepeat: "repeat",
+  backgroundAttachment: "fixed",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center"
+};
+
+const floatingLogoutContainerStyle = {
+  position: "relative"
+};
+
+const floatingLogoutButtonStyle = {
+  position: "absolute",
+  top: "10px",
+  right: "10px",
+  zIndex: "999"
+};
+
 class App extends Component {
   render = () => {
     const { user, signOut, signInWithGoogle } = this.props;
@@ -20,26 +42,28 @@ class App extends Component {
     }
     return (
       <div class="full-height">
-          {user ? (
-            <div class="full-height">
-              <nav class="navbar navbar-light bg-secondary text-light">
-                <span class="navbar-brand mb-0 h1 text-light">Networthy</span>
-                <button className="btn btn-primary" onClick={signOut}>
-                  Sign out
-                </button>
-              </nav>
-              <Main />
+        {user ? (
+          <div class="full-height" style={floatingLogoutContainerStyle}>
+            <div style={floatingLogoutButtonStyle}>
+              <button className="btn" onClick={signOut}>
+                <i class="fas fa-sign-out-alt border rounded-circle p-2"></i>
+              </button>
             </div>
-          ) : (
-            <div class="full-height">
-              <nav class="navbar navbar-light bg-secondary text-light">
-                <span class="navbar-brand mb-0 h1 text-light">Navbar</span>
-                <button className="btn btn-primary" onClick={signInWithGoogle}>
-                  Sign in with Google
+            <Main />
+          </div>
+        ) : (
+          <div class="full-height">
+            <div class="full-height" style={loginPageStyle}>
+              <div class="text-center card p-3 border rounded shadow">
+                <h5>networthy</h5>
+                <button className="btn btn-danger" onClick={signInWithGoogle}>
+                  <i class="fab fa-google border rounded-circle p-2"></i> Sign
+                  in with Google
                 </button>
-              </nav>
+              </div>
             </div>
-          )}
+          </div>
+        )}
       </div>
     );
   };

@@ -2,21 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 var navStyle = {
-  background: "purple",
-  minHeight: "100%"
+  display: "inline",
+  textAlign: "center"
+};
+
+var iconStyle = {
+  width: "35px",
+  height: "35px"
 };
 
 function Navbar() {
   return (
     <div class="p-3" style={navStyle}>
-      <Link
+      {/* <Link
         to="/"
         className={
           window.location.pathname === "/" ? "nav-link active" : "nav-link"
         }
       >
         Overview
-      </Link>
+      </Link> */}
       <Link
         to="/liquidassets"
         className={
@@ -25,7 +30,7 @@ function Navbar() {
             : "nav-link"
         }
       >
-        Liquid Assets
+        <i class="fas fa-tint border rounded-circle p-2" style={iconStyle}></i>
       </Link>
       <Link
         to="/frozenassets"
@@ -35,7 +40,10 @@ function Navbar() {
             : "nav-link"
         }
       >
-        Frozen Assets
+        <i
+          class="fas fa-icicles border rounded-circle p-2"
+          style={iconStyle}
+        ></i>
       </Link>
       <Link
         to="/liabilities"
@@ -45,7 +53,10 @@ function Navbar() {
             : "nav-link"
         }
       >
-        Liabilities
+        <i
+          class="fas fa-file-invoice-dollar border rounded-circle p-2"
+          style={iconStyle}
+        ></i>
       </Link>
     </div>
   );
