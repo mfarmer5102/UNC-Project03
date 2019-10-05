@@ -1,5 +1,5 @@
 //FIREBASE SETUP#########################################################################
-
+console.log("IN AUTH");
 var firebaseConfig = {
   apiKey: "AIzaSyCI_SxzntQv8nO8JNxpYUOOakZCwIAmBXk",
   authDomain: "networthy-36c14.firebaseapp.com",
