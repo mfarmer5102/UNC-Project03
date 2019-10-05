@@ -72,7 +72,7 @@ class GraphCard extends Component {
     return (
       <div className="col-md-6 col-sm-12 mb-4">
         <Link to="/sourcedetail">
-          <div className="card" onClick={this.handleClick}>
+          <div className="card shadow rounded" onClick={this.handleClick}>
             <div className="card-header">{this.props.data.source_name}</div>
             <div className="card-body">
               <Line data={data} height={250} width={500} />
