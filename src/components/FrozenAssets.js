@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import GraphCard from "./GraphCard";
 
 class FrozenAssets extends Component {
@@ -38,6 +39,9 @@ class FrozenAssets extends Component {
       <div className="animated fadeInUpBig">
         <div className="container">
           <h3>Frozen Assets</h3>
+          <Link to="/addnewsource">
+            <button className="btn btn-primary">Add Source</button>
+          </Link>
           <hr></hr>
           <div className="row">{cards}</div>
         </div>

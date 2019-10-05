@@ -1,6 +1,5 @@
 var db = require("../models");
 var uuid = require("uuid/v4");
-console.log(db);
 
 module.exports = function(app) {
   // OVERVIEW ////////////////////////////////////////////////
@@ -31,8 +30,9 @@ module.exports = function(app) {
   });
 
   app.post("/api/liquidassets", function(req, res) {
+    console.log(req.body);
+    req.body.uuid = uuid(); //Assign a UUID
     db.Source.create(req.body).then(function(result) {
-      console.log(result);
       res.sendStatus(200);
     });
   });
@@ -62,8 +62,9 @@ module.exports = function(app) {
   });
 
   app.post("/api/frozenassets", function(req, res) {
+    console.log(req.body);
+    req.body.uuid = uuid(); //Assign a UUID
     db.Source.create(req.body).then(function(result) {
-      console.log(result);
       res.sendStatus(200);
     });
   });
@@ -93,8 +94,9 @@ module.exports = function(app) {
   });
 
   app.post("/api/liabilities", function(req, res) {
+    console.log(req.body);
+    req.body.uuid = uuid(); //Assign a UUID
     db.Source.create(req.body).then(function(result) {
-      console.log(result);
       res.sendStatus(200);
     });
   });
@@ -118,14 +120,12 @@ module.exports = function(app) {
       },
       order: [["entry_date", "DESC"]]
     }).then(function(result) {
-      console.log(result);
       res.json(result);
     });
   });
 
   app.post("/api/sourcedetail", function(req, res) {
     db.Entry.create(req.body).then(function(result) {
-      console.log(result);
       res.sendStatus(200);
     });
   });

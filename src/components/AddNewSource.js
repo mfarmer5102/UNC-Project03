@@ -1,33 +1,55 @@
 import React, { Component } from "react";
-class Form extends Component {
-  // Setting the component's initial state
-  state = {
-    user_uuid: "",
-    date_created: "",
-    source_name: "",
-    uuid: "",
-    type: ""
-  };
+
+const cardStyle = {
+  width: "300px"
+};
+
+const flexCenter = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center"
+};
+
+class AddNewSource extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_uuid: localStorage.getItem("activeUserUUID"),
+      source_name: "",
+      type: ""
+    };
+  }
+
   handleInputChange = event => {
     const value = event.target.value;
-    const source = event.target.source;
+    const name = event.target.name;
     this.setState({
-      [source]: value
+      [name]: value
     });
   };
+
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.source_name === "" || this.state.type === "") {
-      alert("You need to provide a bank name and select a type");
+      alert("New sources require a name and a type.");
     } else {
-      alert(`Your sourse is ${this.state.source_name} ${this.state.type}`);
-      let url = "/api/liquidassets";
+      let url;
+      if (this.state.type === "Liquid Asset") {
+        url = "/api/liquidassets";
+      } else if (this.state.type === "Frozen Asset") {
+        url = "/api/frozenassets";
+      } else if (this.state.type === "Liability") {
+        url = "/api/liabilities";
+      }
+      console.log(url);
       fetch(url, {
         method: "POST",
-        body: {
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           source_name: this.state.source_name,
-          type: this.state.type
-        }
+          type: this.state.type,
+          user_uuid: this.state.user_uuid
+        })
       }).then(response => {
         console.log(response);
         this.setState({
@@ -37,28 +59,48 @@ class Form extends Component {
       });
     }
   };
+
   render() {
     return (
-      <div>
-        <form className="form">
-          <input
-            value={this.state.source_name}
-            name="source_name"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="Source Name"
-          />
-          <input
-            value={this.state.type}
-            name="type"
-            onChange={this.handleInputChange}
-            type="text"
-            placeholder="type"
-          />
-          <button onClick={this.handleFormSubmit}>Submit</button>
-        </form>
+      <div className="full-height" style={flexCenter}>
+        <div className="card rounded shadow p-4" style={cardStyle}>
+          <form>
+            <div class="form-group">
+              <label>Source Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Source name"
+                name="source_name"
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Source Type</label>
+              <select
+                onChange={this.handleInputChange}
+                name="type"
+                class="form-control"
+              >
+                <option selected disabled>
+                  Select a source type
+                </option>
+                <option value="Liquid Asset">Liquid Asset</option>
+                <option value="Frozen Asset">Frozen Asset</option>
+                <option value="Liability">Liability</option>
+              </select>
+            </div>
+            <button
+              onClick={this.handleFormSubmit}
+              type="submit"
+              class="btn btn-primary"
+            >
+              Create
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
 }
-export default Form;
+export default AddNewSource;

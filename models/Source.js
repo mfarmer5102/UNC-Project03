@@ -4,10 +4,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
-    date_created: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
     source_name: {
       type: DataTypes.STRING,
       allowNull: false
