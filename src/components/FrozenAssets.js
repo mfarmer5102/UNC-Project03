@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import GraphCard from "./GraphCard";
 
 class FrozenAssets extends Component {
@@ -18,11 +19,11 @@ class FrozenAssets extends Component {
   }
 
   grabAllUserEntries() {
-    let url = "/api/frozenassets/HU5Caw6T9zcdgpxK82ly8CVrAkk1";
+    let loggedInUser = localStorage.getItem("activeUserUUID");
+    let url = `/api/frozenassets/${loggedInUser}`;
     fetch(url)
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         this.setState({
           allUserEntries: response
         });
@@ -37,7 +38,18 @@ class FrozenAssets extends Component {
     return (
       <div className="animated fadeInUpBig">
         <div className="container">
-          <h3>Frozen Assets</h3>
+          <div className="row">
+            <div className="col-6 text-left">
+              <h3>Frozen Assets</h3>
+            </div>
+            <div className="col-6 text-right">
+              <Link to="/addnewsource">
+                <button className="btn">
+                  <i class="fas fa-plus-circle fa-2x text-primary"></i>
+                </button>
+              </Link>
+            </div>
+          </div>
           <hr></hr>
           <div className="row">{cards}</div>
         </div>

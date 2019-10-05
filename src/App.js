@@ -46,7 +46,7 @@ class App extends Component {
           <div class="full-height" style={floatingLogoutContainerStyle}>
             <div style={floatingLogoutButtonStyle}>
               <button className="btn" onClick={signOut}>
-                <i class="fas fa-sign-out-alt border rounded-circle p-2"></i>
+                <i class="fas fa-sign-out-alt fa-2x border rounded-circle p-2 text-primary"></i>
               </button>
             </div>
             <Main />
@@ -54,7 +54,7 @@ class App extends Component {
         ) : (
           <div class="full-height">
             <div class="full-height" style={loginPageStyle}>
-              <div class="text-center card p-3 border rounded shadow">
+              <div class="text-center card p-3 border rounded shadow animated fadeInDownBig">
                 <h1>networthy</h1>
                 <button className="btn btn-danger" onClick={signInWithGoogle}>
                   <i class="fab fa-google border rounded-circle p-2"></i> Sign

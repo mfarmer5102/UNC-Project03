@@ -10,13 +10,15 @@ const flexCenter = {
   alignItems: "center"
 };
 
-class AddNewSource extends Component {
+class AddNewEntry extends Component {
   constructor(props) {
     super(props);
     this.state = {
       user_uuid: localStorage.getItem("activeUserUUID"),
-      source_name: "",
-      type: ""
+      entry_date: "",
+      amount: "",
+      comments: "",
+      source_uuid: localStorage.getItem("activeSourceUUID")
     };
   }
 
@@ -30,17 +32,10 @@ class AddNewSource extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.source_name === "" || this.state.type === "") {
+    if (this.state.entry_name === "" || this.state.amount === "") {
       alert("New sources require a name and a type.");
     } else {
-      let url;
-      if (this.state.type === "Liquid Asset") {
-        url = "/api/liquidassets";
-      } else if (this.state.type === "Frozen Asset") {
-        url = "/api/frozenassets";
-      } else if (this.state.type === "Liability") {
-        url = "/api/liabilities";
-      }
+      let url = "/api/sourcedetail";
       console.log(url);
       fetch(url, {
         method: "POST",
@@ -48,14 +43,14 @@ class AddNewSource extends Component {
         body: JSON.stringify({
           source_name: this.state.source_name,
           type: this.state.type,
-          user_uuid: this.state.user_uuid
+          user_uuid: this.state.user_uuid,
+          source_uuid: this.state.source_uuid,
+          entry_date: this.state.entry_date,
+          amount: this.state.amount,
+          comments: this.state.comments
         })
       }).then(response => {
         console.log(response);
-        this.setState({
-          source_name: "",
-          type: ""
-        });
       });
     }
   };
@@ -64,40 +59,46 @@ class AddNewSource extends Component {
     return (
       <div className="full-height animated flipInY" style={flexCenter}>
         <div className="card rounded shadow p-4" style={cardStyle}>
-          <h3>Add a Source</h3>
+          <h3>Add an Entry</h3>
           <hr></hr>
           <form>
             <div class="form-group">
-              <label>Source Name</label>
+              <label>Effective Date</label>
               <input
-                type="text"
+                type="date"
                 class="form-control"
-                placeholder="Source name"
-                name="source_name"
+                placeholder="Effective date"
+                name="entry_date"
                 onChange={this.handleInputChange}
               />
             </div>
             <div class="form-group">
-              <label for="exampleInputEmail1">Source Type</label>
-              <select
-                onChange={this.handleInputChange}
-                name="type"
+              <label>Amount</label>
+              <input
+                type="number"
+                step="0.01"
                 class="form-control"
-              >
-                <option selected disabled>
-                  Select a source type
-                </option>
-                <option value="Liquid Asset">Liquid Asset</option>
-                <option value="Frozen Asset">Frozen Asset</option>
-                <option value="Liability">Liability</option>
-              </select>
+                placeholder="Amount"
+                name="amount"
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div class="form-group">
+              <label>Comments</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Comments"
+                name="comments"
+                onChange={this.handleInputChange}
+              />
             </div>
             <button
               onClick={this.handleFormSubmit}
               type="submit"
               class="btn btn-primary mr-2"
             >
-              Create
+              Add
             </button>
             <a href="javascript:history.back()" className="btn btn-secondary">
               Go Back
@@ -108,4 +109,4 @@ class AddNewSource extends Component {
     );
   }
 }
-export default AddNewSource;
+export default AddNewEntry;
