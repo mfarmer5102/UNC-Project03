@@ -95,10 +95,13 @@ class AddNewSource extends Component {
             <button
               onClick={this.handleFormSubmit}
               type="submit"
-              class="btn btn-primary"
+              class="btn btn-primary mr-2"
             >
               Create
             </button>
+            <a href="javascript:history.back()" className="btn btn-secondary">
+              Go Back
+            </a>
           </form>
         </div>
       </div>

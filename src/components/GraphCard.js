@@ -68,14 +68,25 @@ class GraphCard extends Component {
       ]
     };
 
+    let cardContent;
+    if (this.state.correspondingEntries === undefined) {
+      cardContent = (
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      );
+    } else if (this.state.correspondingEntries.length < 2) {
+      cardContent = <p>Add more entries for this source to see trends.</p>;
+    } else {
+      cardContent = <Line data={data} height={250} width={500} />;
+    }
+
     return (
       <div className="col-md-6 col-sm-12 mb-4">
         <Link to="/sourcedetail">
           <div className="card shadow rounded" onClick={this.handleClick}>
             <div className="card-header">{this.props.data.source_name}</div>
-            <div className="card-body">
-              <Line data={data} height={250} width={500} />
-            </div>
+            <div className="card-body text-center">{cardContent}</div>
           </div>
         </Link>
       </div>

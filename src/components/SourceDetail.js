@@ -35,20 +35,43 @@ class SourceDetail extends Component {
     // Prep
     var allItems = this.state.allUserEntries;
     var rows = allItems.map(item => <TableRow data={item} />);
-    //Render
+
+    let tableContent;
+    if (this.state.allUserEntries === undefined) {
+      tableContent = (
+        <div class="spinner-border text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      );
+    } else if (this.state.allUserEntries.length === 0) {
+      tableContent = (
+        <p className="p-2">No entries exist for this source yet.</p>
+      );
+    } else {
+      tableContent = rows;
+    }
+
     return (
       <div className="animated fadeInUpBig pl-5 pr-5">
-        <h3>Source Detail</h3>
-        <Link to="/addnewentry">
-          <button className="btn btn-primary">Add Entry</button>
-        </Link>
+        <div className="row">
+          <div className="col-6 text-left">
+            <h3>Source Detail</h3>
+          </div>
+          <div className="col-6 text-right">
+            <Link to="/addnewentry">
+              <button className="btn">
+                <i class="fas fa-plus-circle fa-2x text-primary"></i>
+              </button>
+            </Link>
+          </div>
+        </div>
         <table className="table table-striped">
           <thead>
             <th>Date</th>
             <th>Amount</th>
             <th>Comments</th>
           </thead>
-          {rows}
+          {tableContent}
         </table>
       </div>
     );

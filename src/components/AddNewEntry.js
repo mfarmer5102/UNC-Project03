@@ -96,10 +96,13 @@ class AddNewEntry extends Component {
             <button
               onClick={this.handleFormSubmit}
               type="submit"
-              class="btn btn-primary"
+              class="btn btn-primary mr-2"
             >
               Add
             </button>
+            <a href="javascript:history.back()" className="btn btn-secondary">
+              Go Back
+            </a>
           </form>
         </div>
       </div>

@@ -38,7 +38,7 @@ class Liabilities extends Component {
     return (
       <div className="animated fadeInUpBig">
         <div className="container">
-        <div className="row">
+          <div className="row">
             <div className="col-6 text-left">
               <h3>Liabilities</h3>
             </div>
