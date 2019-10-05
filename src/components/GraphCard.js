@@ -70,7 +70,7 @@ class GraphCard extends Component {
     };
 
     return (
-      <div className="col-md-6 col-sm-12">
+      <div className="col-md-6 col-sm-12 mb-4">
         <Link to="/sourcedetail">
           <div className="card" onClick={this.handleClick}>
             <div className="card-header">{this.props.data.source_name}</div>

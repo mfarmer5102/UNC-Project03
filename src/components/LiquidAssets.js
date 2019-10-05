@@ -37,9 +37,10 @@ class LiquidAssets extends Component {
     ));
     //Render
     return (
-      <div className="animated bounceInUp">
-        <h3>Liquid Assets</h3>
+      <div className="animated fadeInUpBig">
         <div className="container">
+          <h3>Liquid Assets</h3>
+          <hr></hr>
           <div className="row">{cards}</div>
         </div>
       </div>

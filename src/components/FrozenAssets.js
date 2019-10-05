@@ -35,9 +35,10 @@ class FrozenAssets extends Component {
     var cards = allItems.map(item => <GraphCard data={item} />);
     //Render
     return (
-      <div className="animated bounceInUp">
-        <h3>Frozen Assets</h3>
+      <div className="animated fadeInUpBig">
         <div className="container">
+          <h3>Frozen Assets</h3>
+          <hr></hr>
           <div className="row">{cards}</div>
         </div>
       </div>
