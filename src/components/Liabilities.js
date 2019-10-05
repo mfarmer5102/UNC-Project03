@@ -18,11 +18,11 @@ class Liabilities extends Component {
   }
 
   grabAllUserEntries() {
-    let url = "/api/liabilities/HU5Caw6T9zcdgpxK82ly8CVrAkk1";
+    let loggedInUser = localStorage.getItem("activeUserUUID");
+    let url = `/api/liabilities/${loggedInUser}`;
     fetch(url)
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         this.setState({
           allUserEntries: response
         });

@@ -26,7 +26,7 @@ function Main() {
     <Router>
       <div className="container-fluid full-height" style={noPadding}>
         <div className="row full-height" style={floatingContainerStyle}>
-          <div className="animated slideInLeft" style={floatingContentStyle}>
+          <div className="animated fadeInDownBig" style={floatingContentStyle}>
             <Navbar />
           </div>
           <div className="col-12 p-5">

@@ -18,10 +18,8 @@ class SourceDetail extends Component {
   }
 
   grabAllUserEntries() {
-    let loggedInUser = localStorage.getItem("activeUserUUID");
     let sourceUUID = localStorage.getItem("activeSourceUUID");
-
-    let url = `/api/sourcedetail/${loggedInUser}/${sourceUUID}`;
+    let url = `/api/sourcedetail/${sourceUUID}`;
     fetch(url)
       .then(response => response.json())
       .then(response => {
@@ -44,7 +42,6 @@ class SourceDetail extends Component {
           <thead>
             <th>Date</th>
             <th>Amount</th>
-            <th>Source UUID</th>
             <th>Comments</th>
           </thead>
           {rows}

@@ -6,7 +6,7 @@ class GraphCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInUser: "HU5Caw6T9zcdgpxK82ly8CVrAkk1",
+      loggedInUser: localStorage.getItem("activeUserUUID"),
       sourceUUID: this.props.data.uuid
     };
   }
@@ -21,7 +21,6 @@ class GraphCard extends Component {
     fetch(url)
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         this.setState({
           correspondingEntries: response
         });
