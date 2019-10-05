@@ -1,5 +1,5 @@
 import React from "react";
-import Entry from "./Entry";
+import Entry from "./AddEntry";
 
 class entry extends React.Component {
   constructor(props) {
