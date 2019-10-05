@@ -14,16 +14,32 @@ const providers = {
 class App extends Component {
   render = () => {
     const { user, signOut, signInWithGoogle } = this.props;
+    if (user) {
+      console.log(user.uid);
+      localStorage.setItem("activeUserUUID", user.uid);
+    }
     return (
       <div class="full-height">
-        <header className="App-header">
-          {user ? <Main /> : <p>Please sign in.</p>}
           {user ? (
-            <button onClick={signOut}>Sign out</button>
+            <div class="full-height">
+              <nav class="navbar navbar-light bg-secondary text-light">
+                <span class="navbar-brand mb-0 h1 text-light">Networthy</span>
+                <button className="btn btn-primary" onClick={signOut}>
+                  Sign out
+                </button>
+              </nav>
+              <Main />
+            </div>
           ) : (
-            <button onClick={signInWithGoogle}>Sign in with Google</button>
+            <div class="full-height">
+              <nav class="navbar navbar-light bg-secondary text-light">
+                <span class="navbar-brand mb-0 h1 text-light">Navbar</span>
+                <button className="btn btn-primary" onClick={signInWithGoogle}>
+                  Sign in with Google
+                </button>
+              </nav>
+            </div>
           )}
-        </header>
       </div>
     );
   };
