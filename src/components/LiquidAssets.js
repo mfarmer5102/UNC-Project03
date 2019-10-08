@@ -36,6 +36,7 @@ class LiquidAssets extends Component {
     var cards = allItems.map((item, index) => (
       <GraphCard key={index} data={item} />
     ));
+
     //Render
     return (
       <div className="animated fadeInUpBig">
