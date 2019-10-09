@@ -52,10 +52,7 @@ class AddNewSource extends Component {
         })
       }).then(response => {
         console.log(response);
-        this.setState({
-          source_name: "",
-          type: ""
-        });
+        window.history.back();
       });
     }
   };
