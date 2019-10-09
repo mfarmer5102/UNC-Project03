@@ -51,6 +51,7 @@ class AddNewEntry extends Component {
         })
       }).then(response => {
         console.log(response);
+        window.history.back();
       });
     }
   };
