@@ -14,14 +14,17 @@ var iconStyle = {
 function Navbar() {
   return (
     <div class="p-3" style={navStyle}>
-      {/* <Link
+      <Link
         to="/"
         className={
           window.location.pathname === "/" ? "nav-link active" : "nav-link"
         }
       >
-        Overview
-      </Link> */}
+        <i
+          class="fas fa-tachometer-alt border rounded-circle p-2"
+          style={iconStyle}
+        ></i>
+      </Link>
       <Link
         to="/liquidassets"
         className={
