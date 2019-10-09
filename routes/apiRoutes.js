@@ -62,7 +62,6 @@ module.exports = function(app) {
   });
 
   app.post("/api/frozenassets", function(req, res) {
-    console.log(req.body);
     req.body.uuid = uuid(); //Assign a UUID
     db.Source.create(req.body).then(function(result) {
       res.sendStatus(200);
@@ -94,7 +93,6 @@ module.exports = function(app) {
   });
 
   app.post("/api/liabilities", function(req, res) {
-    console.log(req.body);
     req.body.uuid = uuid(); //Assign a UUID
     db.Source.create(req.body).then(function(result) {
       res.sendStatus(200);
@@ -131,7 +129,7 @@ module.exports = function(app) {
   });
 
   app.delete("/api/sourcedetail/:id", function(req, res) {
-    db.Entry.destroy({
+    db.Source.destroy({
       where: {
         uuid: req.params.id
       }

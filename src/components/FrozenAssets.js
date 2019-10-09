@@ -41,7 +41,7 @@ class FrozenAssets extends Component {
     } else {
       result = cards
     };
-
+                
     //Render
     return (
       <div className="animated fadeInUpBig">

@@ -37,7 +37,6 @@ class App extends Component {
   render = () => {
     const { user, signOut, signInWithGoogle } = this.props;
     if (user) {
-      console.log(user.uid);
       localStorage.setItem("activeUserUUID", user.uid);
     }
     return (

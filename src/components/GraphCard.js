@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Bar, Line, Pie } from "react-chartjs-2";
+import DeleteSourceButton from "./DeleteSourceButton";
 
 class GraphCard extends Component {
   constructor(props) {
@@ -27,6 +28,17 @@ class GraphCard extends Component {
       });
   };
 
+  deleteCorrespondingSource = () => {
+    console.log("attempting to delete");
+    let url = `/api/sourcedetail/${this.props.data.uuid}`;
+    fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
+    }).then(response => {
+      console.log(response);
+    });
+  };
+
   componentDidUpdate() {
     this.grabAllCorrespondingEntries();
   }
@@ -42,7 +54,7 @@ class GraphCard extends Component {
     }
 
     const data = {
-      labels: myLabelsArr,
+      labels: myLabelsArr.reverse(),
       datasets: [
         {
           label: "Amount",
@@ -63,7 +75,7 @@ class GraphCard extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: dataPointsArr
+          data: dataPointsArr.reverse()
         }
       ]
     };
@@ -78,17 +90,42 @@ class GraphCard extends Component {
     } else if (this.state.correspondingEntries.length < 2) {
       cardContent = <p>Add more entries for this source to see trends.</p>;
     } else {
-      cardContent = <Line data={data} height={250} width={500} />;
+      cardContent = (
+        <Line
+          data={data}
+          options={{
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            }
+          }}
+          height={250}
+          width={500}
+        />
+      );
     }
 
     return (
       <div className="col-md-6 col-sm-12 mb-4">
-        <Link to="/sourcedetail">
-          <div className="card shadow rounded" onClick={this.handleClick}>
-            <div className="card-header">{this.props.data.source_name}</div>
-            <div className="card-body text-center">{cardContent}</div>
+        <div className="card shadow rounded" onClick={this.handleClick}>
+          <div className="card-header">
+            <div className="float-left">{this.props.data.source_name}</div>
+            <div className="float-right">
+              <DeleteSourceButton
+                deleteCorrespondingSource={() => this.deleteCorrespondingSource}
+                uuid={this.state.sourceUUID}
+              />
+            </div>
           </div>
-        </Link>
+          <Link to="/sourcedetail">
+            <div className="card-body text-center">{cardContent}</div>
+          </Link>
+        </div>
       </div>
     );
   }
