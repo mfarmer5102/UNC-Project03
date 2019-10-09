@@ -39,11 +39,11 @@ class LiquidAssets extends Component {
 
     var result;
     if (allItems.length === 0) {
-      result = (<h2> "no data found" </h2>)
+      result = <div className="container">No sources found.</div>;
     } else {
-      result = cards
-    };
-                
+      result = cards;
+    }
+
     //Render
     return (
       <div className="animated fadeInUpBig">

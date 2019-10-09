@@ -33,15 +33,17 @@ class FrozenAssets extends Component {
   render() {
     // Prep
     var allItems = this.state.allUserEntries;
-    var cards = allItems.map(item => <GraphCard data={item} />);
+    var cards = allItems.map((item, index) => (
+      <GraphCard key={index} data={item} />
+    ));
 
     var result;
     if (allItems.length === 0) {
-      result = (<h2> "no data found" </h2>)
+      result = <div className="container">No sources found.</div>;
     } else {
-      result = cards
-    };
-                
+      result = cards;
+    }
+
     //Render
     return (
       <div className="animated fadeInUpBig">
