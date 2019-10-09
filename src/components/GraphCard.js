@@ -78,7 +78,24 @@ class GraphCard extends Component {
     } else if (this.state.correspondingEntries.length < 2) {
       cardContent = <p>Add more entries for this source to see trends.</p>;
     } else {
-      cardContent = <Line data={data} height={250} width={500} />;
+      cardContent = (
+        <Line
+          data={data}
+          options={{
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            }
+          }}
+          height={250}
+          width={500}
+        />
+      );
     }
 
     return (
