@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Bar, Line, Pie } from "react-chartjs-2";
+import DeleteSourceButton from "./DeleteSourceButton";
 
 class GraphCard extends Component {
   constructor(props) {
@@ -25,6 +26,17 @@ class GraphCard extends Component {
           correspondingEntries: response
         });
       });
+  };
+
+  deleteCorrespondingSource = () => {
+    console.log("attempting to delete");
+    let url = `/api/sourcedetail/${this.props.data.uuid}`;
+    fetch(url, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
+    }).then(response => {
+      console.log(response);
+    });
   };
 
   componentDidUpdate() {
@@ -83,12 +95,20 @@ class GraphCard extends Component {
 
     return (
       <div className="col-md-6 col-sm-12 mb-4">
-        <Link to="/sourcedetail">
-          <div className="card shadow rounded" onClick={this.handleClick}>
-            <div className="card-header">{this.props.data.source_name}</div>
-            <div className="card-body text-center">{cardContent}</div>
+        <div className="card shadow rounded" onClick={this.handleClick}>
+          <div className="card-header">
+            <div className="float-left">{this.props.data.source_name}</div>
+            <div className="float-right">
+              <DeleteSourceButton
+                deleteCorrespondingSource={() => this.deleteCorrespondingSource}
+                uuid={this.state.sourceUUID}
+              />
+            </div>
           </div>
-        </Link>
+          <Link to="/sourcedetail">
+            <div className="card-body text-center">{cardContent}</div>
+          </Link>
+        </div>
       </div>
     );
   }
