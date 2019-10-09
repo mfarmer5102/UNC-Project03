@@ -36,6 +36,12 @@ class LiquidAssets extends Component {
     var cards = allItems.map((item, index) => (
       <GraphCard key={index} data={item} />
     ));
+    var result;
+    if (allItems.length === 0) {
+      result = (<h2> "no data found" </h2>)
+    } else {
+      result = cards
+    };
     //Render
     return (
       <div className="animated fadeInUpBig">
@@ -53,7 +59,7 @@ class LiquidAssets extends Component {
             </div>
           </div>
           <hr></hr>
-          <div className="row">{cards}</div>
+          <div className="row">{result}</div>
         </div>
       </div>
     );
