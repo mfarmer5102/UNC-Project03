@@ -95,15 +95,6 @@ class GraphCard extends Component {
           data={data}
           options={{
             scales: {
-              xAxes: [
-                {
-                  // stacked: true,
-                  ticks: {
-                    type: "time",
-                    distribution: "linear"
-                  }
-                }
-              ],
               yAxes: [
                 {
                   ticks: {
