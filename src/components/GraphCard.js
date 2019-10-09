@@ -54,7 +54,7 @@ class GraphCard extends Component {
     }
 
     const data = {
-      labels: myLabelsArr,
+      labels: myLabelsArr.reverse(),
       datasets: [
         {
           label: "Amount",
@@ -75,7 +75,7 @@ class GraphCard extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: dataPointsArr
+          data: dataPointsArr.reverse()
         }
       ]
     };
@@ -95,6 +95,15 @@ class GraphCard extends Component {
           data={data}
           options={{
             scales: {
+              xAxes: [
+                {
+                  // stacked: true,
+                  ticks: {
+                    type: "time",
+                    distribution: "linear"
+                  }
+                }
+              ],
               yAxes: [
                 {
                   ticks: {
