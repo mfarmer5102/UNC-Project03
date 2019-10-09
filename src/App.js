@@ -4,6 +4,7 @@ import withFirebaseAuth from "react-with-firebase-auth";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "./firebaseConfig";
+import logo from "./logo.png";
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
@@ -54,7 +55,7 @@ class App extends Component {
           <div class="full-height">
             <div class="full-height" style={loginPageStyle}>
               <div class="text-center card p-3 border rounded shadow animated fadeInDownBig">
-                <h1>networthy</h1>
+                <img src={logo} height="200px" width="200px"></img>
                 <button className="btn btn-danger" onClick={signInWithGoogle}>
                   <i class="fab fa-google border rounded-circle p-2"></i> Sign
                   in with Google
