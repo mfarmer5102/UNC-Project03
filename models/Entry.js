@@ -5,8 +5,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     entry_date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+      type: DataTypes.DATEONLY
+      // allowNull: false
     },
 
     source_uuid: {

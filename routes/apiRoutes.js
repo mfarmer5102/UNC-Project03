@@ -137,4 +137,16 @@ module.exports = function(app) {
       res.json(result);
     });
   });
+
+  app.delete("/api/entries/:id", function(req, res) {
+    console.log("What is this?:" + req.params.id);
+    db.Entry.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(result) {
+      console.log(result);
+      res.json(result);
+    });
+  });
 };
