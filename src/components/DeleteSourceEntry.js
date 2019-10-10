@@ -8,7 +8,7 @@ class DeleteSourceEntry extends Component {
   render() {
     return (
       <div onClick={this.props.deleteCorrespondingEntry()}>
-        <a>Delete</a>
+        <a className="btn btn-outline-danger">Delete</a>
       </div>
     );
   }

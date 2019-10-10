@@ -66,11 +66,11 @@ class SourceDetail extends Component {
           </div>
         </div>
         <table className="table table-striped">
-          <thead>
+          <thead className="thead thead-light">
             <th>Date</th>
             <th>Amount</th>
             <th>Comments</th>
-            <th>Delete</th>
+            <th className="text-right">Delete</th>
           </thead>
           {tableContent}
         </table>

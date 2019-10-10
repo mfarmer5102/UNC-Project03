@@ -29,10 +29,13 @@ class TableRow extends Component {
         <td>{this.props.data.entry_date}</td>
         <td>${this.props.data.amount}</td>
         <td>{this.props.data.comments}</td>
-        <td>
-          <btn onClick={() => this.handleDelete(this.props.data.id)}>
+        <td className='text-right'>
+          <div
+            className="btn btn-outline-danger"
+            onClick={() => this.handleDelete(this.props.data.id)}
+          >
             Delete
-          </btn>
+          </div>
         </td>
       </tr>
     );
