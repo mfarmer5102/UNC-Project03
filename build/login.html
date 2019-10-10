@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Networthy</title>
+
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!--Icons-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Style -->
+    <style>
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background-image: url("medibga.jpg");
+        background-size: cover;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+    </style>
+
+    <!-- Animate CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css"
+      rel="stylesheet"
+    />
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+
+  <body class="container-fluid">
+    <!-- Credit Badge -->
+    <div
+      id="creatorsBanner"
+      style="text-align: center; position: fixed; bottom: 10px; color: black; background: rgba(255, 255, 255, 0.5); padding: 10px; font-size: 0.8rem"
+    >
+      <span>MATTHEW FARMER</span>
+      |
+      <span>WENDY CHEN</span>
+      |
+      <span>JI SOO NOH</span>
+      |
+      <span>ZUOYI PHANG</span>
+    </div>
+
+    <!-- Login Box -->
+    <div class="card" style="width: 350px; padding: 0px; margin: auto">
+      <div class="card-header" style="background: rgb(45, 45, 124)">
+        <img src="logo.png" style="width: 100%" />
+      </div>
+      <div class="card-body" style="padding: 40px">
+        <form id="loginForm">
+          <input id="inputEmail" type="email" placeholder="Email" />
+          <input id="inputPassword" type="password" placeholder="Password" />
+          <br /><br />
+          <button
+            id="loginButton"
+            type="submit"
+            class="btn btn-action"
+            style="width: 100%; background: rgb(45, 45, 124)"
+          >
+            Login
+          </button>
+          <div style="margin-top: 20px; text-align: center">
+            Don't have an account? Just enter your desired credentials above and
+            click <a id="signUpButton" style="cursor: pointer">here</a> to
+            register or
+            <a id="guestButton" style="cursor: pointer">continue as a guest</a>.
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.2/firebase-auth.js"></script>
+    <script src="js/authorizationProvide.js"></script>
+  </body>
+</html>

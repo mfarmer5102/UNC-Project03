@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import TableRow from "./TableRow";
+import DeleteSourceEntry from "./DeleteSourceEntry";
 
 class SourceDetail extends Component {
   constructor(props) {
@@ -24,7 +25,6 @@ class SourceDetail extends Component {
     fetch(url)
       .then(response => response.json())
       .then(response => {
-        console.log(response);
         this.setState({
           allUserEntries: response
         });
@@ -70,6 +70,7 @@ class SourceDetail extends Component {
             <th>Date</th>
             <th>Amount</th>
             <th>Comments</th>
+            <th>Delete</th>
           </thead>
           {tableContent}
         </table>
