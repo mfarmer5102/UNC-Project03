@@ -149,4 +149,52 @@ module.exports = function(app) {
       res.json(result);
     });
   });
+
+  // DETERMINE AND RETURN LATEST VALUES FOR SUM OF LIQUID AND FROZEN ASSETS, SEPARATELY ////////////////////////////////////////////////
+
+  app.get("/api/assetbreakdown", function(req, res) {
+    var sql = `
+    SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type
+    FROM Sources
+    JOIN Entries 
+    ON Sources.uuid=Entries.source_uuid
+    ORDER BY Entries.entry_date DESC;
+    `;
+    db.sequelize.query(sql).then(function(result) {
+      //Find the latest values for each source
+      let x = result[0];
+      let customResponse = [];
+      let uniqueSources = [];
+      for (var i = 0; i < x.length; i++) {
+        if (uniqueSources.indexOf(x[i].source_name) === -1) {
+          let y = {};
+          (y.source_name = x[i].source_name),
+            (y.amount = x[i].amount),
+            (y.entry_date = x[i].entry_date),
+            (y.type = x[i].type);
+          customResponse.push(y);
+        }
+        uniqueSources.push(x[i].source_name);
+      }
+      //Tally for frozen and liquid
+      let currentLiquidValue = 0;
+      let currentFrozenValue = 0;
+
+      for (var i = 0; i < customResponse.length; i++) {
+        if (customResponse[i].type === "Liquid Asset") {
+          currentLiquidValue += customResponse[i].amount;
+        } else if (customResponse[i].type === "Frozen Asset") {
+          currentFrozenValue += customResponse[i].amount;
+        }
+      }
+      console.log(currentLiquidValue);
+      console.log(currentFrozenValue);
+      //Make a final response
+      let finalResponse = {}
+      finalResponse.currentLiquidValue = currentLiquidValue
+      finalResponse.currentFrozenValue = currentFrozenValue
+      //Send response to the front end
+      res.json(finalResponse);
+    });
+  });
 };

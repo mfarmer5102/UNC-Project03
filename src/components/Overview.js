@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import AssetBreakdown from "./overviewCards/AssetBreakdown";
+import NetWorth from "./overviewCards/NetWorth";
+import MainGraph from "./overviewCards/MainGraph";
 
 class Overview extends Component {
   constructor(props) {
@@ -17,10 +20,11 @@ class Overview extends Component {
             <div className="col-12 text-left">
               <h3>Overview</h3>
             </div>
-          </div>
-          <hr></hr>
-          <div className="row">
-            <div className="col-12 text-left">Hi</div>
+            <div className="row">
+              <MainGraph />
+              <NetWorth />
+              <AssetBreakdown />
+            </div>
           </div>
         </div>
       </div>
