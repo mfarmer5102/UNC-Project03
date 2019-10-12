@@ -190,11 +190,56 @@ module.exports = function(app) {
       console.log(currentLiquidValue);
       console.log(currentFrozenValue);
       //Make a final response
-      let finalResponse = {}
-      finalResponse.currentLiquidValue = currentLiquidValue
-      finalResponse.currentFrozenValue = currentFrozenValue
+      let finalResponse = {};
+      finalResponse.currentLiquidValue = currentLiquidValue;
+      finalResponse.currentFrozenValue = currentFrozenValue;
       //Send response to the front end
       res.json(finalResponse);
+    });
+  });
+
+  app.get("/api/timeline", function(req, res) {
+    let responseObj = [];
+    var sql = `
+    SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type
+    FROM Sources
+    JOIN Entries 
+    ON Sources.uuid=Entries.source_uuid
+    ORDER BY Entries.entry_date DESC;
+    `;
+    db.sequelize.query(sql).then(function(result) {
+      //Find the latest values for each source
+      let allEntries = result[0];
+
+      //Find out all of the months logged by the user
+      let encounteredMonths = [];
+      for (var i = 0; i < allEntries.length; i++) {
+        let monthString =
+          allEntries[i].entry_date[0] +
+          allEntries[i].entry_date[1] +
+          allEntries[i].entry_date[2] +
+          allEntries[i].entry_date[3] +
+          allEntries[i].entry_date[4] +
+          allEntries[i].entry_date[5] +
+          allEntries[i].entry_date[6];
+        if (encounteredMonths.indexOf(monthString) === -1) {
+          encounteredMonths.push(monthString);
+        }
+      }
+      console.log(encounteredMonths);
+      //Create an object for each month
+      for (var i = 0; i < encounteredMonths.length; i++) {
+        let thisMonth = {
+          month: encounteredMonths[i],
+          liquid: {},
+          frozen: {},
+          liabilities: {}
+        };
+        console.log(thisMonth);
+        //Return to front end
+        responseObj.push(thisMonth);
+      }
+      res.json(responseObj);
     });
   });
 };
