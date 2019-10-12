@@ -214,32 +214,83 @@ module.exports = function(app) {
       //Find out all of the months logged by the user
       let encounteredMonths = [];
       for (var i = 0; i < allEntries.length; i++) {
-        let monthString =
-          allEntries[i].entry_date[0] +
-          allEntries[i].entry_date[1] +
-          allEntries[i].entry_date[2] +
-          allEntries[i].entry_date[3] +
-          allEntries[i].entry_date[4] +
-          allEntries[i].entry_date[5] +
-          allEntries[i].entry_date[6];
-        if (encounteredMonths.indexOf(monthString) === -1) {
-          encounteredMonths.push(monthString);
+        let month = makeMonthString(allEntries[i]);
+        if (encounteredMonths.indexOf(month) === -1) {
+          encounteredMonths.push(month);
         }
       }
-      console.log(encounteredMonths);
-      //Create an object for each month
+
+      //For every month on file
       for (var i = 0; i < encounteredMonths.length; i++) {
-        let thisMonth = {
+        //Create new month object
+        let thisMonthsActivity = {
           month: encounteredMonths[i],
-          liquid: {},
-          frozen: {},
-          liabilities: {}
+          liquid: [],
+          frozen: [],
+          liabilities: []
         };
-        console.log(thisMonth);
-        //Return to front end
-        responseObj.push(thisMonth);
+
+        //Push in each transaction into the appropriate category
+        for (var i = 0; i < allEntries.length; i++) {
+          let entryMonth = makeMonthString2(allEntries[i].entry_date);
+          if (entryMonth === thisMonthsActivity.month) {
+            if (allEntries[i].type === "Liquid Asset") {
+              let newObj = {};
+              newObj.source_name = allEntries[i].source_name;
+              newObj.type = allEntries[i].type;
+              newObj.amount = allEntries[i].amount;
+              newObj.entry_date = allEntries[i].entry_date;
+              thisMonthsActivity.liquid.push(newObj);
+            }
+            if (allEntries[i].type === "Frozen Asset") {
+              let newObj = {};
+              newObj.source_name = allEntries[i].source_name;
+              newObj.type = allEntries[i].type;
+              newObj.amount = allEntries[i].amount;
+              newObj.entry_date = allEntries[i].entry_date;
+              thisMonthsActivity.frozen.push(newObj);
+            }
+            if (allEntries[i].type === "Liability") {
+              let newObj = {};
+              newObj.source_name = allEntries[i].source_name;
+              newObj.type = allEntries[i].type;
+              newObj.amount = allEntries[i].amount;
+              newObj.entry_date = allEntries[i].entry_date;
+              thisMonthsActivity.liabilities.push(newObj);
+            }
+          }
+        }
+
+        //Add the month object to the response object
+        responseObj.push(thisMonthsActivity);
       }
+
+      //Return all month objects in an array
       res.json(responseObj);
     });
   });
 };
+
+function makeMonthString(argObj) {
+  let monthString =
+    argObj.entry_date[0] +
+    argObj.entry_date[1] +
+    argObj.entry_date[2] +
+    argObj.entry_date[3] +
+    argObj.entry_date[4] +
+    argObj.entry_date[5] +
+    argObj.entry_date[6];
+  return monthString;
+}
+
+function makeMonthString2(argObj) {
+  let monthString =
+    argObj[0] +
+    argObj[1] +
+    argObj[2] +
+    argObj[3] +
+    argObj[4] +
+    argObj[5] +
+    argObj[6];
+  return monthString;
+}
