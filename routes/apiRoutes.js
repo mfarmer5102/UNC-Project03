@@ -199,7 +199,6 @@ module.exports = function(app) {
   });
 
   app.get("/api/timeline", function(req, res) {
-    let responseObj = [];
     var sql = `
     SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type
     FROM Sources
@@ -207,6 +206,7 @@ module.exports = function(app) {
     ON Sources.uuid=Entries.source_uuid
     ORDER BY Entries.entry_date DESC;
     `;
+
     db.sequelize.query(sql).then(function(result) {
       //Find the latest values for each source
       let allEntries = result[0];
@@ -219,11 +219,22 @@ module.exports = function(app) {
           encounteredMonths.push(month);
         }
       }
-
+      console.log(encounteredMonths);
+      console.log(encounteredMonths.length);
       //For every month on file
-      for (var i = 0; i < encounteredMonths.length; i++) {
+      let responseObj = [];
+
+      console.log(encounteredMonths);
+      console.log(encounteredMonths.length);
+      console.log("^^^");
+      console.log(encounteredMonths[0]);
+      console.log(encounteredMonths[1]);
+      console.log("^^^");
+
+      for (let i = 0; i < encounteredMonths.length; i++) {
+        console.log(encounteredMonths[i]);
         //Create new month object
-        let thisMonthsActivity = {
+        let singleMonthObj = {
           month: encounteredMonths[i],
           liquid: [],
           frozen: [],
@@ -231,16 +242,19 @@ module.exports = function(app) {
         };
 
         //Push in each transaction into the appropriate category
-        for (var i = 0; i < allEntries.length; i++) {
+        for (let i = 0; i < allEntries.length; i++) {
           let entryMonth = makeMonthString2(allEntries[i].entry_date);
-          if (entryMonth === thisMonthsActivity.month) {
+          console.log(singleMonthObj.month);
+          console.log(entryMonth);
+          console.log("*****");
+          if (entryMonth === singleMonthObj.month) {
             if (allEntries[i].type === "Liquid Asset") {
               let newObj = {};
               newObj.source_name = allEntries[i].source_name;
               newObj.type = allEntries[i].type;
               newObj.amount = allEntries[i].amount;
               newObj.entry_date = allEntries[i].entry_date;
-              thisMonthsActivity.liquid.push(newObj);
+              singleMonthObj.liquid.push(newObj);
             }
             if (allEntries[i].type === "Frozen Asset") {
               let newObj = {};
@@ -248,7 +262,7 @@ module.exports = function(app) {
               newObj.type = allEntries[i].type;
               newObj.amount = allEntries[i].amount;
               newObj.entry_date = allEntries[i].entry_date;
-              thisMonthsActivity.frozen.push(newObj);
+              singleMonthObj.frozen.push(newObj);
             }
             if (allEntries[i].type === "Liability") {
               let newObj = {};
@@ -256,16 +270,12 @@ module.exports = function(app) {
               newObj.type = allEntries[i].type;
               newObj.amount = allEntries[i].amount;
               newObj.entry_date = allEntries[i].entry_date;
-              thisMonthsActivity.liabilities.push(newObj);
+              singleMonthObj.liabilities.push(newObj);
             }
           }
         }
-
-        //Add the month object to the response object
-        responseObj.push(thisMonthsActivity);
+        responseObj.push(singleMonthObj);
       }
-
-      //Return all month objects in an array
       res.json(responseObj);
     });
   });
