@@ -198,7 +198,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/api/timeline", function(req, res) {
+  app.get("/api/timeline/:userid", function(req, res) {
     //============================================================================================================================================
     //============================================================================================================================================
 
@@ -227,11 +227,12 @@ module.exports = function(app) {
     }
 
     var sql = `
-    SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type
+    SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type, Entries.user_uuid
     FROM Sources
     JOIN Entries 
     ON Sources.uuid=Entries.source_uuid
-    ORDER BY Entries.entry_date DESC;
+    WHERE Entries.user_uuid='${req.params.userid}'
+    ORDER BY Entries.entry_date DESC
     `;
 
     db.sequelize.query(sql).then(function(result) {
