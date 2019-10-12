@@ -199,6 +199,33 @@ module.exports = function(app) {
   });
 
   app.get("/api/timeline", function(req, res) {
+    //============================================================================================================================================
+    //============================================================================================================================================
+
+    function makeMonthString(argObj) {
+      let monthString =
+        argObj.entry_date[0] +
+        argObj.entry_date[1] +
+        argObj.entry_date[2] +
+        argObj.entry_date[3] +
+        argObj.entry_date[4] +
+        argObj.entry_date[5] +
+        argObj.entry_date[6];
+      return monthString;
+    }
+
+    function makeMonthString2(argObj) {
+      let monthString =
+        argObj[0] +
+        argObj[1] +
+        argObj[2] +
+        argObj[3] +
+        argObj[4] +
+        argObj[5] +
+        argObj[6];
+      return monthString;
+    }
+
     var sql = `
     SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type
     FROM Sources
@@ -219,17 +246,9 @@ module.exports = function(app) {
           encounteredMonths.push(month);
         }
       }
-      console.log(encounteredMonths);
-      console.log(encounteredMonths.length);
+
       //For every month on file
       let responseObj = [];
-
-      console.log(encounteredMonths);
-      console.log(encounteredMonths.length);
-      console.log("^^^");
-      console.log(encounteredMonths[0]);
-      console.log(encounteredMonths[1]);
-      console.log("^^^");
 
       for (let i = 0; i < encounteredMonths.length; i++) {
         console.log(encounteredMonths[i]);
@@ -244,9 +263,6 @@ module.exports = function(app) {
         //Push in each transaction into the appropriate category
         for (let i = 0; i < allEntries.length; i++) {
           let entryMonth = makeMonthString2(allEntries[i].entry_date);
-          console.log(singleMonthObj.month);
-          console.log(entryMonth);
-          console.log("*****");
           if (entryMonth === singleMonthObj.month) {
             if (allEntries[i].type === "Liquid Asset") {
               let newObj = {};
@@ -276,31 +292,38 @@ module.exports = function(app) {
         }
         responseObj.push(singleMonthObj);
       }
-      res.json(responseObj);
+      //============================================================================================================================================
+      let finalResponse = [];
+      for (let i = 0; i < responseObj.length; i++) {
+        let myObj = {
+          month: responseObj[i].month,
+          liquidsAccum: 0,
+          frozensAccum: 0,
+          liabilitiesAccum: 0
+        };
+        let x = responseObj[i];
+        let liquids = x.liquid;
+        let frozens = x.frozen;
+        let liabilities = x.liabilities;
+
+        for (let j = 0; j < liquids.length; j++) {
+          myObj.liquidsAccum += liquids[j].amount;
+        }
+        for (let j = 0; j < frozens.length; j++) {
+          myObj.frozensAccum += frozens[j].amount;
+        }
+        for (let j = 0; j < liabilities.length; j++) {
+          myObj.liabilitiesAccum += liabilities[j].amount;
+        }
+        console.log(myObj.liquidsAccum);
+        console.log(myObj.frozensAccum);
+        console.log(myObj.liabilitiesAccum);
+        finalResponse.push(myObj);
+      }
+      res.send(finalResponse);
+      // res.json(responseObj);
+      //============================================================================================================================================
+      //============================================================================================================================================
     });
   });
 };
-
-function makeMonthString(argObj) {
-  let monthString =
-    argObj.entry_date[0] +
-    argObj.entry_date[1] +
-    argObj.entry_date[2] +
-    argObj.entry_date[3] +
-    argObj.entry_date[4] +
-    argObj.entry_date[5] +
-    argObj.entry_date[6];
-  return monthString;
-}
-
-function makeMonthString2(argObj) {
-  let monthString =
-    argObj[0] +
-    argObj[1] +
-    argObj[2] +
-    argObj[3] +
-    argObj[4] +
-    argObj[5] +
-    argObj[6];
-  return monthString;
-}
