@@ -2,50 +2,47 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Bar, Line, Pie } from "react-chartjs-2";
 
-class AssetBreakdown extends Component {
+class MainGraph extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   loggedInUser: localStorage.getItem("activeUserUUID"),
-    //   sourceUUID: this.props.data.uuid
-    // };
+    this.state = {
+      correspondingEntries: []
+    };
   }
 
-  // handleClick = () => {
-  //   localStorage.setItem("activeUserUUID", this.state.loggedInUser);
-  //   localStorage.setItem("activeSourceUUID", this.state.sourceUUID);
-  // };
+  grabAllCorrespondingEntries = () => {
+    let url = `/api/timeline/${localStorage.getItem("activeUserUUID")}`;
+    fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          correspondingEntries: response
+        });
+      });
+  };
 
-  // grabAllCorrespondingEntries = () => {
-  //   let url = `/api/sourcedetail/${this.props.data.uuid}`;
-  //   fetch(url)
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({
-  //         correspondingEntries: response
-  //       });
-  //     });
-  // };
-
-  // deleteCorrespondingSource = () => {
-  //   console.log("attempting to delete");
-  //   let url = `/api/sourcedetail/${this.props.data.uuid}`;
-  //   fetch(url, {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" }
-  //   }).then(response => {
-  //     console.log(response);
-  //   });
-  // };
-
-  // componentDidUpdate() {
-  //   this.grabAllCorrespondingEntries();
-  // }
+  componentDidMount() {
+    this.grabAllCorrespondingEntries();
+  }
 
   render() {
-    let myLabelsArr = ["2019-09-05", "2019-09-28", "2019-10-10"];
-    let assetDataPointsArr = [400, 800, 550];
-    let liabilityDataPointsArr = [600, 300, 590];
+    let myLabelsArr = [];
+    let assetDataPointsArr = [];
+    let liabilityDataPointsArr = [];
+    if (this.state.correspondingEntries) {
+      for (var i = 0; i < this.state.correspondingEntries.length; i++) {
+        let good =
+          parseFloat(this.state.correspondingEntries[i].liquidsAccum) +
+          parseFloat(this.state.correspondingEntries[i].frozensAccum);
+        let bad = parseFloat(
+          this.state.correspondingEntries[i].liabilitiesAccum
+        );
+        assetDataPointsArr.push(good);
+        liabilityDataPointsArr.push(bad);
+        myLabelsArr.push(this.state.correspondingEntries[i].month);
+      }
+    }
+
     // if (this.state.correspondingEntries) {
     //   for (var i = 0; i < this.state.correspondingEntries.length; i++) {
     //     dataPointsArr.push(this.state.correspondingEntries[i].amount);
@@ -138,4 +135,4 @@ class AssetBreakdown extends Component {
   }
 }
 
-export default AssetBreakdown;
+export default MainGraph;
