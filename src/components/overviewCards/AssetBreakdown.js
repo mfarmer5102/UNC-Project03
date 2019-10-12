@@ -5,52 +5,35 @@ import { Bar, Line, Pie, Doughnut } from "react-chartjs-2";
 class AssetBreakdown extends Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   loggedInUser: localStorage.getItem("activeUserUUID"),
-    //   sourceUUID: this.props.data.uuid
-    // };
+    this.state = {
+      correspondingEntries: []
+    };
   }
 
-  // handleClick = () => {
-  //   localStorage.setItem("activeUserUUID", this.state.loggedInUser);
-  //   localStorage.setItem("activeSourceUUID", this.state.sourceUUID);
-  // };
+  grabAllCorrespondingEntries = () => {
+    let url = `/api/assetbreakdown/${localStorage.getItem("activeUserUUID")}`;
+    fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({
+          correspondingEntries: response
+        });
+      });
+  };
 
-  // grabAllCorrespondingEntries = () => {
-  //   let url = `/api/sourcedetail/${this.props.data.uuid}`;
-  //   fetch(url)
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       this.setState({
-  //         correspondingEntries: response
-  //       });
-  //     });
-  // };
-
-  // deleteCorrespondingSource = () => {
-  //   console.log("attempting to delete");
-  //   let url = `/api/sourcedetail/${this.props.data.uuid}`;
-  //   fetch(url, {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" }
-  //   }).then(response => {
-  //     console.log(response);
-  //   });
-  // };
-
-  // componentDidUpdate() {
-  //   this.grabAllCorrespondingEntries();
-  // }
+  componentDidMount() {
+    this.grabAllCorrespondingEntries();
+  }
 
   render() {
-    let myLabelsArr = ["Frozen", "Liquid"];
-    let dataPointsArr = [800, 400];
-    // if (this.state.correspondingEntries) {
-    //   for (var i = 0; i < this.state.correspondingEntries.length; i++) {
-    //     dataPointsArr.push(this.state.correspondingEntries[i].amount);
-    //     myLabelsArr.push(this.state.correspondingEntries[i].entry_date);
-    //   }
-    // }
+    let myLabelsArr = [];
+    let dataPointsArr = [];
+    let liquid = parseFloat(this.state.correspondingEntries.currentLiquidValue);
+    let frozen = parseFloat(this.state.correspondingEntries.currentFrozenValue);
+    myLabelsArr.push("Liquid");
+    myLabelsArr.push("Frozen");
+    dataPointsArr.push(liquid);
+    dataPointsArr.push(frozen);
 
     const data = {
       labels: myLabelsArr.reverse(),
@@ -69,7 +52,10 @@ class AssetBreakdown extends Component {
           pointBackgroundColor: "#fff",
           pointBorderWidth: 1,
           pointHoverRadius: 5,
-          pointHoverBackgroundColor: ["rgba(214,28,96,0.4)", "rgba(101,194,174,0.4)"],
+          pointHoverBackgroundColor: [
+            "rgba(214,28,96,0.4)",
+            "rgba(101,194,174,0.4)"
+          ],
           pointHoverBorderColor: "rgba(220,220,220,1)",
           pointHoverBorderWidth: 2,
           pointRadius: 1,
@@ -79,13 +65,7 @@ class AssetBreakdown extends Component {
       ]
     };
 
-    let cardContent = (
-      <Doughnut
-        data={data}
-        height={250}
-        width={500}
-      />
-    );
+    let cardContent = <Doughnut data={data} height={250} width={500} />;
 
     return (
       <div className="col-md-6 col-sm-12 mb-4">

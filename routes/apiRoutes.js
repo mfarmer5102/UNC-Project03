@@ -152,12 +152,13 @@ module.exports = function(app) {
 
   // DETERMINE AND RETURN LATEST VALUES FOR SUM OF LIQUID AND FROZEN ASSETS, SEPARATELY ////////////////////////////////////////////////
 
-  app.get("/api/assetbreakdown", function(req, res) {
+  app.get("/api/assetbreakdown/:userid", function(req, res) {
     var sql = `
     SELECT Sources.source_name, Entries.amount, Entries.entry_date, Sources.type
     FROM Sources
     JOIN Entries 
     ON Sources.uuid=Entries.source_uuid
+    WHERE Entries.user_uuid='${req.params.userid}'
     ORDER BY Entries.entry_date DESC;
     `;
     db.sequelize.query(sql).then(function(result) {
