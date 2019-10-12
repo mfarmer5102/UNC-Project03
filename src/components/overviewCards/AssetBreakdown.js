@@ -71,7 +71,7 @@ class AssetBreakdown extends Component {
       <div className="col-md-6 col-sm-12 mb-4">
         <div className="card shadow rounded" onClick={this.handleClick}>
           <div className="card-header">
-            <div className="float-left">Asset Analysis</div>
+            <div className="float-left">Current Liquidity</div>
             <div className="float-right"></div>
           </div>
           <div className="card-body text-center">{cardContent}</div>
