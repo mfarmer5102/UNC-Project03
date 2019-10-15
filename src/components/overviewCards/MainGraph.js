@@ -37,8 +37,8 @@ class MainGraph extends Component {
         let bad = parseFloat(
           this.state.correspondingEntries[i].liabilitiesAccum
         );
-        assetDataPointsArr.push(good);
-        liabilityDataPointsArr.push(bad);
+        assetDataPointsArr.push(good.toFixed(2));
+        liabilityDataPointsArr.push(bad.toFixed(2));
         myLabelsArr.push(this.state.correspondingEntries[i].month);
       }
     }

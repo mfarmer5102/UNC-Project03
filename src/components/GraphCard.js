@@ -48,7 +48,9 @@ class GraphCard extends Component {
     let dataPointsArr = [];
     if (this.state.correspondingEntries) {
       for (var i = 0; i < this.state.correspondingEntries.length; i++) {
-        dataPointsArr.push(this.state.correspondingEntries[i].amount);
+        dataPointsArr.push(
+          this.state.correspondingEntries[i].amount.toFixed(2)
+        );
         myLabelsArr.push(this.state.correspondingEntries[i].entry_date);
       }
     }
