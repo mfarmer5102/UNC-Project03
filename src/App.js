@@ -14,7 +14,7 @@ const providers = {
 
 const loginPageStyle = {
   backgroundImage:
-    "url('https://images.unsplash.com/photo-1480442646297-37901d5ea815?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80')",
+    "url('https://images.unsplash.com/photo-1484242780561-6aff8688c36a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80')",
   backgroundSize: "cover",
   backgroundRepeat: "repeat",
   backgroundAttachment: "fixed",

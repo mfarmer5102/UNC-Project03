@@ -32,8 +32,8 @@ class AssetBreakdown extends Component {
     let frozen = parseFloat(this.state.correspondingEntries.currentFrozenValue);
     myLabelsArr.push("Liquid");
     myLabelsArr.push("Frozen");
-    dataPointsArr.push(liquid);
-    dataPointsArr.push(frozen);
+    dataPointsArr.push(liquid.toFixed(2));
+    dataPointsArr.push(frozen.toFixed(2));
 
     const data = {
       labels: myLabelsArr.reverse(),

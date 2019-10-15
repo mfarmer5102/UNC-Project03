@@ -33,7 +33,7 @@ class AddNewEntry extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     if (this.state.entry_name === "" || this.state.amount === "") {
-      alert("New sources require a name and a type.");
+      alert("New entries require a name and an amount.");
     } else {
       let url = "/api/sourcedetail";
       console.log(url);

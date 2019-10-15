@@ -37,7 +37,7 @@ class NetWorth extends Component {
           this.state.correspondingEntries[i].liabilitiesAccum
         );
         let net = good - bad;
-        dataPointsArr.push(net);
+        dataPointsArr.push(net.toFixed(2));
         myLabelsArr.push(this.state.correspondingEntries[i].month);
       }
     }
